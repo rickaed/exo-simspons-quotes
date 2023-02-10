@@ -51,52 +51,42 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.http.get<any>("https://thesimpsonsquoteapi.glitch.me/quotes?count=6")
       .subscribe((quotesFromApi: any) => {
-        console.log('from api', quotesFromApi)
+        // console.log('from api', quotesFromApi)
 
         let quoteByCharacter: any = {};
 
         for (let i in quotesFromApi) {
           let characterName = quotesFromApi[i].character;
           quoteByCharacter[characterName] = quotesFromApi[i];
-
-          console.log(quoteByCharacter[characterName]);
+          // console.log(quoteByCharacter[characterName]);
         }
 
         for (let i in quoteByCharacter) {
           this.mesQuotes.push(quoteByCharacter[i]);
         }
+
         this.mesQuotes.forEach((persQuote: any) => {
-         
           persQuote.quote = [persQuote.quote]
         });
-        // Display the unique objects
-        console.log('mon tableau api', this.mesQuotes);
+        // console.log('mon tableau api', this.mesQuotes);
       })
   };
   newQuote(charact: string) {
     const toSend = charact.split(' ')
-    console.log(toSend)
-    console.log(`https://thesimpsonsquoteapi.glitch.me/quotes?character=${toSend[0]}`)
+    // console.log(toSend)
+    // console.log(`https://thesimpsonsquoteapi.glitch.me/quotes?character=${toSend[0]}`)
     return this.http.get<any>(`https://thesimpsonsquoteapi.glitch.me/quotes?character=${toSend[0]}`)
       .subscribe((quoteFromApi: any) => {
         console.log('ma nouvelle qutoe :', quoteFromApi[0].quote)
 
         for (let i in this.mesQuotes) {
-          console.log('personnage :',this.mesQuotes[i].character)
+          // console.log('personnage :',this.mesQuotes[i].character)
 
           if (this.mesQuotes[i].character === quoteFromApi[0].character) {
             this.mesQuotes[i].quote.push(quoteFromApi[0].quote)
           }
         }
       })
-        //  this.mesQuotes.charcat
-
-
-
-
-
-        // this.mesQuotes.push(quoteFromApi[0].quote)
-        // console.log(this.mesQuotes)
       }
 
 };

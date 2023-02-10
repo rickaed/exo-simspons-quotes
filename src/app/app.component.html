@@ -1,11 +1,13 @@
-<h1>{{ title }}</h1> 
+<h1>{{ title }}</h1>
 <section>
-<div *ngFor="let el of mesQuotes"><!--modifier ici test testQuotes par mes quotes-->
-    <div>{{this.el.character}} said</div>
-    <div>
-        <img [src]="el.image" [alt]="'image de '+el.character">
-        <div *ngFor="let quote of el.quote ">{{quote}}</div>
+    <div class="cards" *ngFor="let el of mesQuotes"><!--modifier ici test testQuotes par mes quotes-->
+        <h3>{{this.el.character}} said</h3>
+        <div class="img-quotes">
+            <img [src]="el.image" [alt]="'image de '+el.character">
+            <div class="quotes">
+                <li *ngFor="let quote of el.quote ">{{quote}}</li>
+            </div>
+        </div>
+        <button (click)="newQuote(el.character)">{{el.character}}</button>
     </div>
-    <button (click)="newQuote(el.character)">{{el.character}}</button>
-</div>
 </section>
