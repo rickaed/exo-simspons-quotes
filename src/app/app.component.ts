@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+interface ElQuote {
+  character: string,
+  characterDirection: string,
+  image: string,
+  quote: string,
+}
 
 @Component({
   selector: 'app-root',
@@ -49,9 +55,12 @@ export class AppComponent implements OnInit {
   mesQuotes: any = [];
 
   ngOnInit() {
-    this.http.get<any>("https://thesimpsonsquoteapi.glitch.me/quotes?count=6")
-      .subscribe((quotesFromApi: any) => {
+    // recuperer les 6 quotes
+    this.http.get<ElQuote[]>("https://thesimpsonsquoteapi.glitch.me/quotes?count=6")
+      .subscribe(quotesFromApi => {
         // console.log('from api', quotesFromApi)
+
+        //creation d'un
 
         let quoteByCharacter: any = {};
 
@@ -87,7 +96,7 @@ export class AppComponent implements OnInit {
           }
         }
       })
-      }
+  }
 
 };
 
